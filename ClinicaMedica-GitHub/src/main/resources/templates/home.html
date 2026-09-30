@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clínica Médica</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<header>
+    <h1>Clínica Médica</h1>
+    <p>Situação de Aprendizagem 4 - Etapa 2</p>
+</header>
+
+<nav>
+    <a th:href="@{/}">Início</a>
+    <a th:href="@{/pacientes}">Pacientes</a>
+    <a th:href="@{/medicos}">Médicos</a>
+    <a th:href="@{/consultas}">Consultas</a>
+    <a th:href="@{/h2-console}">Banco H2</a>
+</nav>
+
+<main>
+    <h2>Página inicial</h2>
+    <p>Esta página demonstra a integração entre Spring Boot, Spring MVC, Spring Data JPA, H2 e Thymeleaf.</p>
+
+    <section class="cards">
+        <div class="card">
+            <strong th:text="${totalPacientes}">0</strong>
+            <span>Pacientes cadastrados</span>
+        </div>
+        <div class="card">
+            <strong th:text="${totalMedicos}">0</strong>
+            <span>Médicos cadastrados</span>
+        </div>
+        <div class="card">
+            <strong th:text="${totalConsultas}">0</strong>
+            <span>Consultas cadastradas</span>
+        </div>
+    </section>
+
+    <h2>Consultas de teste</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Data/Hora</th>
+            <th>Paciente</th>
+            <th>Médico</th>
+            <th>Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="consulta : ${consultas}">
+            <td th:text="${#temporals.format(consulta.dataHora, 'dd/MM/yyyy HH:mm')}">24/09/2026 09:00</td>
+            <td th:text="${consulta.paciente.nome}">Paciente</td>
+            <td th:text="${consulta.medico.nome}">Médico</td>
+            <td th:text="${consulta.status}">AGENDADA</td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+</body>
+</html>
